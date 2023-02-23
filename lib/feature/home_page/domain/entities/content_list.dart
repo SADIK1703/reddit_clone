@@ -1,4 +1,4 @@
-import 'package:reddit_clone/feature/home_page/data/models/post_model.dart';
+import 'package:reddit_clone/feature/home_page/data/models/content_model.dart';
 
 class ContentList {
   ContentList({
@@ -14,6 +14,6 @@ class ContentList {
   final int? dist;
   final String? modhash;
   final String? geoFilter;
-  final List<PostModel>? children;
+  final List<ContentModel>? children;
   final String? before;
 }

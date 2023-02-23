@@ -13,6 +13,7 @@ enum TopPostListTimeSpan {
     } catch (e) {
       return null;
     }
+    return null;
   }
 
   const TopPostListTimeSpan(this.mapValue);

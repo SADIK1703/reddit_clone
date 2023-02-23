@@ -1,9 +1,15 @@
 import 'dart:convert';
 
+import 'package:flutter/material.dart';
+import 'package:reddit_clone/core/constants/style_constants/app_colors.dart';
+import 'package:reddit_clone/core/helpers/color_helper.dart';
+import 'package:reddit_clone/feature/home_page/data/models/content_model.dart';
 import 'package:reddit_clone/feature/home_page/data/models/gildings_model.dart';
 import 'package:reddit_clone/feature/home_page/data/models/preview_model.dart';
+import 'package:reddit_clone/feature/home_page/domain/entities/link_flair_text_color.dart';
+import 'package:reddit_clone/feature/home_page/domain/entities/post.dart';
 
-class PostModel {
+class PostModel implements Post, ContentDataModel {
   PostModel({
     this.approvedAtUtc,
     this.subreddit,
@@ -48,7 +54,6 @@ class PostModel {
     this.isCreatedFromAdsUi,
     this.authorPremium,
     this.thumbnail,
-    this.edited,
     this.authorFlairCssClass,
     this.authorFlairRichtext,
     this.gildings,
@@ -115,31 +120,57 @@ class PostModel {
     this.isVideo,
   });
 
+  @override
+  final String? selftext;
+  @override
+  final bool? saved;
+  @override
+  final String? title;
+  @override
+  final String? subredditNamePrefixed;
+  @override
+  final int? downs;
+  @override
+  final bool? hideScore;
+  @override
+  final String? name;
+  @override
+  final Color? linkFlairTextColor;
+  @override
+  final String? subredditType;
+  @override
+  final int? ups;
+  @override
+  final String? linkFlairText;
+  @override
+  final String? thumbnail;
+  @override
+  final String? linkFlairType;
+  @override
+  final PreviewModel? preview;
+  @override
+  final Color? linkFlairBackgroundColor;
+  @override
+  final String? author;
+  @override
+  final int? numComments;
+  @override
+  final DateTime? createdUtc;
   final dynamic approvedAtUtc;
   final String? subreddit;
-  final String? selftext;
   final String? authorFullname;
-  final bool? saved;
   final dynamic modReasonTitle;
   final int? gilded;
   final bool? clicked;
-  final String? title;
   final List<dynamic>? linkFlairRichtext;
-  final String? subredditNamePrefixed;
   final bool? hidden;
   final int? pwls;
   final String? linkFlairCssClass;
-  final int? downs;
   final dynamic thumbnailHeight;
   final dynamic topAwardedType;
-  final bool? hideScore;
-  final String? name;
   final bool? quarantine;
-  final String? linkFlairTextColor;
   final double? upvoteRatio;
   final String? authorFlairBackgroundColor;
-  final String? subredditType;
-  final int? ups;
   final int? totalAwardsReceived;
   final GildingsModel? mediaEmbed;
   final dynamic thumbnailWidth;
@@ -151,14 +182,11 @@ class PostModel {
   final bool? isMeta;
   final dynamic category;
   final GildingsModel? secureMediaEmbed;
-  final String? linkFlairText;
   final bool? canModPost;
   final int? score;
   final dynamic approvedBy;
   final bool? isCreatedFromAdsUi;
   final bool? authorPremium;
-  final String? thumbnail;
-  final bool? edited;
   final String? authorFlairCssClass;
   final List<dynamic>? authorFlairRichtext;
   final GildingsModel? gildings;
@@ -166,8 +194,7 @@ class PostModel {
   final dynamic contentCategories;
   final bool? isSelf;
   final dynamic modNote;
-  final int? created;
-  final String? linkFlairType;
+  final double? created;
   final int? wls;
   final dynamic removedByCategory;
   final dynamic bannedBy;
@@ -183,7 +210,6 @@ class PostModel {
   final bool? isCrosspostable;
   final bool? pinned;
   final bool? over18;
-  final PreviewModel? preview;
   final List<dynamic>? allAwardings;
   final List<dynamic>? awarders;
   final bool? mediaOnly;
@@ -201,13 +227,10 @@ class PostModel {
   final bool? authorIsBlocked;
   final dynamic modReasonBy;
   final dynamic removalReason;
-  final String? linkFlairBackgroundColor;
   final String? id;
   final bool? isRobotIndexable;
   final dynamic reportReasons;
-  final String? author;
   final dynamic discussionType;
-  final int? numComments;
   final bool? sendReplies;
   final String? whitelistStatus;
   final bool? contestMode;
@@ -219,13 +242,13 @@ class PostModel {
   final bool? stickied;
   final String? url;
   final int? subredditSubscribers;
-  final int? createdUtc;
   final int? numCrossposts;
   final dynamic media;
   final bool? isVideo;
 
   factory PostModel.fromRawJson(String str) => PostModel.fromJson(json.decode(str));
 
+  @override
   String toRawJson() => json.encode(toJson());
 
   factory PostModel.fromJson(Map<String, dynamic> json) => PostModel(
@@ -250,7 +273,10 @@ class PostModel {
         hideScore: json["hide_score"],
         name: json["name"],
         quarantine: json["quarantine"],
-        linkFlairTextColor: json["link_flair_text_color"],
+        linkFlairTextColor: LinkFlairTextColorHelper.getColorFromParametricValue(json["link_flair_text_color"]) ==
+                LinkFlairTextColor.light
+            ? AppColors.paleGrey
+            : AppColors.semiBlack,
         upvoteRatio: json["upvote_ratio"]?.toDouble(),
         authorFlairBackgroundColor: json["author_flair_background_color"],
         subredditType: json["subreddit_type"],
@@ -274,7 +300,6 @@ class PostModel {
         isCreatedFromAdsUi: json["is_created_from_ads_ui"],
         authorPremium: json["author_premium"],
         thumbnail: json["thumbnail"],
-        edited: json["edited"],
         authorFlairCssClass: json["author_flair_css_class"],
         authorFlairRichtext: json["author_flair_richtext"] == null
             ? []
@@ -319,7 +344,7 @@ class PostModel {
         authorIsBlocked: json["author_is_blocked"],
         modReasonBy: json["mod_reason_by"],
         removalReason: json["removal_reason"],
-        linkFlairBackgroundColor: json["link_flair_background_color"],
+        linkFlairBackgroundColor: ColorHelper.fromHexCode(json["link_flair_background_color"]),
         id: json["id"],
         isRobotIndexable: json["is_robot_indexable"],
         reportReasons: json["report_reasons"],
@@ -337,12 +362,15 @@ class PostModel {
         stickied: json["stickied"],
         url: json["url"],
         subredditSubscribers: json["subreddit_subscribers"],
-        createdUtc: json["created_utc"],
+        createdUtc: json["created_utc"] != null
+            ? DateTime.fromMillisecondsSinceEpoch((json["created_utc"] * 1000).toInt())
+            : null,
         numCrossposts: json["num_crossposts"],
         media: json["media"],
         isVideo: json["is_video"],
       );
 
+  @override
   Map<String, dynamic> toJson() => {
         "approved_at_utc": approvedAtUtc,
         "subreddit": subreddit,
@@ -387,7 +415,6 @@ class PostModel {
         "is_created_from_ads_ui": isCreatedFromAdsUi,
         "author_premium": authorPremium,
         "thumbnail": thumbnail,
-        "edited": edited,
         "author_flair_css_class": authorFlairCssClass,
         "author_flair_richtext":
             authorFlairRichtext == null ? [] : List<dynamic>.from(authorFlairRichtext!.map((x) => x)),
@@ -449,7 +476,7 @@ class PostModel {
         "stickied": stickied,
         "url": url,
         "subreddit_subscribers": subredditSubscribers,
-        "created_utc": createdUtc,
+        "created_utc": createdUtc != null ? createdUtc!.millisecondsSinceEpoch / 1000 : null,
         "num_crossposts": numCrossposts,
         "media": media,
         "is_video": isVideo,

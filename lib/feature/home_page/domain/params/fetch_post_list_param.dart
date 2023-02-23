@@ -13,8 +13,8 @@ class FetchPostListParam {
 
   FetchPostListParam({
     required this.timeSpan,
-    required this.after,
-    required this.before,
+    this.after,
+    this.before,
     this.count = 0,
     this.limit = 25,
     this.show = false,

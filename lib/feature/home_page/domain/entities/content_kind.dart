@@ -1,6 +1,7 @@
 // Write according to https://www.reddit.com/dev/api#GET_top
 
 enum ContentKind {
+  listing("Listing"),
   comment('t1'),
   account('t2'),
   link('t3'),

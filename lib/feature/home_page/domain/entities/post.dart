@@ -1,3 +1,4 @@
+import 'package:flutter/material.dart';
 import 'package:reddit_clone/feature/home_page/data/models/preview_model.dart';
 
 class Post {
@@ -28,15 +29,15 @@ class Post {
   final int? downs;
   final bool? hideScore;
   final String? name;
-  final String? linkFlairTextColor;
+  final Color? linkFlairTextColor;
   final String? subredditType;
   final int? ups;
   final String? linkFlairText;
   final String? thumbnail;
   final String? linkFlairType;
   final PreviewModel? preview;
-  final String? linkFlairBackgroundColor;
+  final Color? linkFlairBackgroundColor;
   final String? author;
   final int? numComments;
-  final int? createdUtc;
+  final DateTime? createdUtc;
 }
