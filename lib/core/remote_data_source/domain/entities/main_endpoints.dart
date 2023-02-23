@@ -4,6 +4,7 @@ enum MainEndpoints {
   fetchPostList('r/flutterdev/top.json');
 
   final String path;
+  static const String hostPath = "https://www.reddit.com/";
   const MainEndpoints(this.path);
 }
 

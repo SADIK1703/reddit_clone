@@ -18,7 +18,7 @@ class PingpongMainRequestImpl implements BaseRequestRepository {
     required final RequestParams requestParam,
   }) async {
     try {
-      final String endPoint = requestParam.endPoint.path;
+      final String endPoint = MainEndpoints.hostPath + requestParam.endPoint.path;
       final dynamic queryParameters = _getQueryParameterByRequest(requestParam);
       final dynamic data = _getDataByRequest(requestParam);
       final Dio instance = Dio()

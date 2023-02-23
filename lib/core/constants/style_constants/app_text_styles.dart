@@ -1,6 +1,7 @@
 import 'dart:ui';
 
 import 'package:flutter/material.dart';
+import 'package:reddit_clone/core/constants/style_constants/app_colors.dart';
 
 class AppTextStyles {
   TextStyle _defaultTextStyle = const TextStyle();
@@ -65,10 +66,10 @@ class AppTextStyles {
 
   TextStyle head({
     bool? inherit,
-    Color? color,
+    Color? color = AppColors.grey,
     Color? backgroundColor,
     double? fontSize,
-    FontWeight? fontWeight,
+    FontWeight? fontWeight = FontWeight.w700,
     FontStyle? fontStyle,
     double? letterSpacing,
     double? wordSpacing,
@@ -123,10 +124,10 @@ class AppTextStyles {
 
   TextStyle body({
     bool? inherit,
-    Color? color,
+    Color? color = AppColors.paleGrey,
     Color? backgroundColor,
-    double? fontSize,
-    FontWeight? fontWeight,
+    double? fontSize = 14,
+    FontWeight? fontWeight = FontWeight.w700,
     FontStyle? fontStyle,
     double? letterSpacing,
     double? wordSpacing,
@@ -181,10 +182,10 @@ class AppTextStyles {
 
   TextStyle text({
     bool? inherit,
-    Color? color,
+    Color? color = AppColors.grey,
     Color? backgroundColor,
-    double? fontSize,
-    FontWeight? fontWeight,
+    double? fontSize = 10,
+    FontWeight? fontWeight = FontWeight.w600,
     FontStyle? fontStyle,
     double? letterSpacing,
     double? wordSpacing,

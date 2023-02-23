@@ -1,10 +1,13 @@
 import 'package:dio/dio.dart';
-import 'package:reddit_clone/core/constants/service_constants.dart/debug_request_print_constants.dart';
+import 'package:reddit_clone/core/constants/service_constants/debug_request_print_constants.dart';
 import 'package:reddit_clone/core/functions/colorful_print_by_debug_label_type.dart';
 import 'package:reddit_clone/core/remote_data_source/domain/entities/main_endpoints.dart';
 
 class CustomLogInterceptor extends LogInterceptor {
-  CustomLogInterceptor();
+  CustomLogInterceptor({
+    super.requestBody = true,
+    super.responseBody = true,
+  });
 
   @override
   void onRequest(final RequestOptions options, final RequestInterceptorHandler handler) {
@@ -79,11 +82,11 @@ class CustomLogInterceptor extends LogInterceptor {
   void _printAll(final msg, final DebugLabelType debugLabelType) {
     msg.toString().split('\n').forEach(
       (final object) {
-        if (object.toString().length <= DebugRequestPrintConstants.maxResponseValueLenth) {
+        if (object.toString().length != DebugRequestPrintConstants.maxResponseValueLenth) {
           colorfulPrintByDebugLabelType(object, debugLabelType);
         } else {
           colorfulPrintByDebugLabelType(
-            "${object.split(':').first}: {You can data by increase DebugRequestPrintConstants.maxResponseValueLenth}",
+            "${object.split(':').first}: {You can get data by increase DebugRequestPrintConstants.maxResponseValueLenth}",
             debugLabelType,
           );
         }
