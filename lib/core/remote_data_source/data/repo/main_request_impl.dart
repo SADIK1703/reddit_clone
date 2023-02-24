@@ -10,8 +10,8 @@ import 'package:reddit_clone/core/remote_data_source/domain/entities/request_par
 import 'package:reddit_clone/core/remote_data_source/domain/entities/status_code_enums.dart';
 import 'package:reddit_clone/core/remote_data_source/domain/repo/base_request_repository.dart';
 
-class PingpongMainRequestImpl implements BaseRequestRepository {
-  PingpongMainRequestImpl();
+class MainRequestImpl implements BaseRequestRepository {
+  MainRequestImpl();
 
   @override
   Future<Either<Failure, String>> request({

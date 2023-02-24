@@ -4,10 +4,10 @@ import 'package:reddit_clone/core/remote_data_source/domain/entities/request_par
 import 'package:reddit_clone/core/remote_data_source/domain/repo/base_request_repository.dart';
 import 'package:reddit_clone/core/usecase/usecase.dart';
 
-class PingpongMainRequest implements Usecase<String, RequestParams> {
+class MainRequest implements Usecase<String, RequestParams> {
   BaseRequestRepository repository;
 
-  PingpongMainRequest(this.repository);
+  MainRequest(this.repository);
 
   @override
   Future<Either<Failure, String>> call(final params) async {

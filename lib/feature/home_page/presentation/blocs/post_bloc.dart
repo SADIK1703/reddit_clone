@@ -5,10 +5,10 @@ import 'package:equatable/equatable.dart';
 import 'package:meta/meta.dart';
 import 'package:reddit_clone/core/constants/text_constants/error_messages.dart';
 import 'package:reddit_clone/core/failures/failure.dart';
-import 'package:reddit_clone/core/remote_data_source/data/repo/pingpong_main_request_impl.dart';
+import 'package:reddit_clone/core/remote_data_source/data/repo/main_request_impl.dart';
 import 'package:reddit_clone/core/remote_data_source/domain/entities/main_endpoints.dart';
 import 'package:reddit_clone/core/remote_data_source/domain/entities/request_params.dart';
-import 'package:reddit_clone/core/remote_data_source/domain/usecases/pingpong_main_request.dart';
+import 'package:reddit_clone/core/remote_data_source/domain/usecases/main_request.dart';
 import 'package:reddit_clone/feature/home_page/data/models/content_list_model.dart';
 import 'package:reddit_clone/feature/home_page/data/models/content_model.dart';
 import 'package:reddit_clone/feature/home_page/domain/entities/content.dart';
@@ -21,7 +21,7 @@ part 'post_event.dart';
 part 'post_state.dart';
 
 class PostListBloc extends Bloc<PostListEvent, PostListState> {
-  final PingpongMainRequest _mainRequest = PingpongMainRequest(PingpongMainRequestImpl());
+  final MainRequest _mainRequest = MainRequest(MainRequestImpl());
 
   PostListBloc() : super(PostListInitial()) {
     on<FetchPostList>(
@@ -30,7 +30,7 @@ class PostListBloc extends Bloc<PostListEvent, PostListState> {
         final responseEither = await _mainRequest.call(
           RequestParams(
             endPoint: MainEndpoints.fetchPostList,
-            requestBody: FetchPostListParam(timeSpan: TopPostListTimeSpan.all).toMap(),
+            requestBody: FetchPostListParam(timeSpan: TopPostListTimeSpan.year).toMap(),
           ),
         );
         responseEither.fold(

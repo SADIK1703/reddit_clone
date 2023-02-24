@@ -15,7 +15,7 @@ class FetchPostListParam {
     required this.timeSpan,
     this.after,
     this.before,
-    this.count = 0,
+    this.count = 1,
     this.limit = 25,
     this.show = false,
     this.srDetail = false,
@@ -24,8 +24,6 @@ class FetchPostListParam {
   Map<String, dynamic> toMap() {
     return <String, dynamic>{
       'timeSpan': timeSpan?.mapValue,
-      'after': after,
-      'before': before,
       'count': count,
       'limit': limit,
       'show': show,
@@ -36,8 +34,6 @@ class FetchPostListParam {
   factory FetchPostListParam.fromMap(Map<String, dynamic> map) {
     return FetchPostListParam(
       timeSpan: map['timeSpan'] != null ? TopPostListTimeSpan.fromString(map['timeSpan']) : null,
-      after: map['after'] != null ? map['after'] as String : null,
-      before: map['before'] != null ? map['before'] as String : null,
       count: map['count'] as int,
       limit: map['limit'] as int,
       show: map['show'] as bool,
