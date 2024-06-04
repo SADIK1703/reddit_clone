@@ -7,7 +7,7 @@ class CustomInterceptor extends Interceptor {
   CustomInterceptor(this.requestParams);
 
   @override
-  Future<void> onError(final DioError err, final ErrorInterceptorHandler handler) async {
+  Future<void> onError(final DioException err, final ErrorInterceptorHandler handler) async {
     super.onError(err, handler);
   }
 

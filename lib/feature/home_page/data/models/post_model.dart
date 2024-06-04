@@ -240,6 +240,7 @@ class PostModel implements Post, ContentDataModel {
   final String? permalink;
   final String? parentWhitelistStatus;
   final bool? stickied;
+  @override
   final String? url;
   final int? subredditSubscribers;
   final int? numCrossposts;

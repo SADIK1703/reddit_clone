@@ -39,20 +39,20 @@ class NoInternetConnectionFailure extends Failure {
   List<Object?> get props => [];
 }
 
-Failure getFailureByDioErrors(final DioError error) {
+Failure getFailureByDioErrors(final DioException error) {
   switch (error.type) {
-    case DioErrorType.connectionTimeout:
+    case DioExceptionType.connectionTimeout:
       return GatewayTimeOutFailure();
-    case DioErrorType.sendTimeout:
+    case DioExceptionType.sendTimeout:
       return GatewayTimeOutFailure();
-    case DioErrorType.receiveTimeout:
+    case DioExceptionType.receiveTimeout:
       return GatewayTimeOutFailure();
-    case DioErrorType.cancel:
+    case DioExceptionType.cancel:
       return RequestCancelledFailure(error.message ?? '');
-    case DioErrorType.connectionError:
-    case DioErrorType.badCertificate:
-    case DioErrorType.badResponse:
-    case DioErrorType.unknown:
+    case DioExceptionType.connectionError:
+    case DioExceptionType.badCertificate:
+    case DioExceptionType.badResponse:
+    case DioExceptionType.unknown:
       throw CustomMessageFailure(error.message ?? '');
   }
 }

@@ -21,6 +21,7 @@ class Post {
     this.author,
     this.numComments,
     this.createdUtc,
+    this.url,
   });
   final String? selftext;
   final bool? saved;
@@ -40,4 +41,5 @@ class Post {
   final String? author;
   final int? numComments;
   final DateTime? createdUtc;
+  final String? url;
 }

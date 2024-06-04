@@ -53,7 +53,7 @@ class CustomLogInterceptor extends LogInterceptor {
   }
 
   @override
-  void onError(final DioError err, final ErrorInterceptorHandler handler) {
+  void onError(final DioException err, final ErrorInterceptorHandler handler) {
     handler.next(err);
   }
 

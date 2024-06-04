@@ -1,5 +1,3 @@
-import 'dart:ui';
-
 import 'package:flutter/material.dart';
 import 'package:reddit_clone/core/constants/style_constants/app_colors.dart';
 
